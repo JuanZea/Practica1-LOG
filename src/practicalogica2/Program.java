@@ -269,7 +269,7 @@ public class Program {
         int i, j, c;
         for (c = 0; c < order; c++) {
             for (i = 0; i < order - 1; i++) {
-                for (j = 0; j < order - (i+1); j++) {
+                for (j = 0; j < order - (i + 1); j++) {
                     if(matrix[j][c] > matrix[j+1][c])
                         intercambiar(j, c, j+1, c);
                     muestraMatriz();
@@ -293,7 +293,18 @@ public class Program {
         
     }
     public static void ordenarAscendentementePorColumna1() {
-        
+        int i, j, sw;
+        for (i = 0; i < order - 1; i++) {
+            sw = 0;
+            for (j = 0; j <= order - 1 - (i + 1); j++) {
+                if(matrix[j][0] > matrix[j + 1][0]){                    
+                    intercambiarFilas(j, j + 1);
+                    sw = 1;
+                }
+            }
+            if(sw == 0)
+                return;
+        }
     }
     public static void intercambiarColumnas() {
         System.out.println("Ingrese la primera columna a cambiar:");
@@ -330,6 +341,10 @@ public class Program {
         }
     }
   
+    public static void intercambiarFilas(int f1, int f2) {
+        for(int i = 0; i < order; i++)
+            intercambiar(f1, i, f2, i);
+    }
     public static void intercambiar(int f1,int c1, int f2, int c2) {
         int aux = matrix[f1][c1];
         matrix[f1][c1] = matrix[f2][c2];
