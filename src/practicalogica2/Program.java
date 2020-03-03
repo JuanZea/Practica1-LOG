@@ -304,27 +304,28 @@ public class Program {
             intercambiar(i, c1, i, c2);
     }
     public static void datosQueSeanPrimos() {
-        ArrayList<Integer> primes = new ArrayList<>();
-        for(int[] is: matrix)
-            for(int x: is){
+        ArrayList<String> primes = new ArrayList<>();
+        for(int i = 0; i < order; i++)
+            for(int j = 0; j < order; j++){
                 boolean prime = true;
                 int count = 2;
-                if(x == 1)
+                if(matrix[i][j] == 1)
                     prime = false;
-                while(prime && count!=x){
-                    if(x%count == 0)
+                while(prime && count!=matrix[i][j]){
+                    if(matrix[i][j]%count == 0)
                         prime = false;
                     count++;
                 }
                 if(prime)
-                    primes.add(x);
+                    primes.add(matrix[i][j] + "-" + (i + 1) + "," + (j + 1));
             }
         if(primes.isEmpty())
             System.out.println("No hay datos que sean primos.");
         else{
-            System.out.println("Los datos primos son:");
+            System.out.println("Los datos primos son:\n"
+                    + "DATO:\tFILA:\tCOLUMNA:");
             for(int i = 0; i < primes.size(); i++){
-                System.out.println(primes.get(i));
+                System.out.println(primes.get(i).substring(0, primes.get(i).indexOf('-')) + "\t" + primes.get(i).substring(primes.get(i).indexOf('-') + 1, primes.get(i).indexOf(',')) + "\t" + primes.get(i).substring(primes.get(i).indexOf(',') + 1));
             }
         }
     }
