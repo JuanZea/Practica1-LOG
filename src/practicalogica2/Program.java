@@ -287,22 +287,38 @@ public class Program {
         System.out.println("El promedio de la diagonal secundaria es: " + mean + "\n");
     }
     public static void ordenaDescendentementePorColumnasTodaLaMatriz() {
-        int i, j, d, c;
-        int sw = 0;
-        for (c = 0; c < order; c++) {
-            for (i = 1 - sw; i <= order - 1; i++) {
-                d = matrix[i][c];
-                j = i - 1;
-                while (j >= 0 && d < matrix[j][c]) {                
-                    matrix[j + 1][c] = matrix[j][c];
-                    j = j - 1;
-                }
-                matrix[j + 1][c] = d;
-                muestraMatriz();
+        int[] numbers = new int[order*order];
+        int f = 0;
+        int c = 0;
+        for (int x = 0; x < order*order; x++) {
+            numbers[x] = matrix[f][c];
+            c++;
+            if(c == order){
+                f++;
+                c = 0;
             }
-            sw = 1;
-            
         }
+        int i, j, d;
+        for(i = 1; i <= numbers.length - 1; i++){
+            d = numbers[i];
+            j = i - 1;
+            while (j >= 0 && d > numbers[j]) {                
+                numbers[j + 1] = numbers[j];
+                j = j - 1;                
+            }
+            numbers[j + 1] = d;
+        }
+        f = 0;
+        c = 0;
+        for (int x = 0; x < order*order; x++) {
+            matrix[c][f] = numbers[x];
+            c++;
+            if(c == order){
+                f++;
+                c = 0;
+            }
+        }
+        System.out.println("La matriz ha diso ordenada correctamente.\n");
     }
     public static void mostrarPorFilasTriangularSuperiorDerecha() {
         
