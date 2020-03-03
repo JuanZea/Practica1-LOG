@@ -269,10 +269,9 @@ public class Program {
         int i, j, c;
         for (c = 0; c < order; c++) {
             for (i = 0; i < order - 1; i++) {
-                for (j = 0; j < order - (i + 1); j++) {
+                for (j = 0; j <= order - 2 - i; j++) {
                     if(matrix[j][c] > matrix[j+1][c])
                         intercambiar(j, c, j+1, c);
-                    muestraMatriz();
                 }
             }
         }
@@ -287,7 +286,22 @@ public class Program {
         System.out.println("El promedio de la diagonal secundaria es: " + mean + "\n");
     }
     public static void ordenaDescendentementePorColumnasTodaLaMatriz() {
-        
+        int i, j, d, c;
+        int sw = 0;
+        for (c = 0; c < order; c++) {
+            for (i = 1 - sw; i <= order - 1; i++) {
+                d = matrix[i][c];
+                j = i - 1;
+                while (j >= 0 && d < matrix[j][c]) {                
+                    matrix[j + 1][c] = matrix[j][c];
+                    j = j - 1;
+                }
+                matrix[j + 1][c] = d;
+                muestraMatriz();
+            }
+            sw = 1;
+            
+        }
     }
     public static void mostrarPorFilasTriangularSuperiorDerecha() {
         
@@ -296,7 +310,7 @@ public class Program {
         int i, j, sw;
         for (i = 0; i < order - 1; i++) {
             sw = 0;
-            for (j = 0; j <= order - 1 - (i + 1); j++) {
+            for (j = 0; j <= order - 2 - i; j++) {
                 if(matrix[j][0] > matrix[j + 1][0]){                    
                     intercambiarFilas(j, j + 1);
                     sw = 1;
