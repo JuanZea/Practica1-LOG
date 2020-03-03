@@ -275,6 +275,7 @@ public class Program {
                 }
             }
         }
+        System.out.println("Las columnas de la matriz han sido ordenada correctamente.\n");
     }
     public static void promedioDiagonalSecundaria() {
         int sum = 0;
@@ -316,9 +317,12 @@ public class Program {
                     sw = 1;
                 }
             }
-            if(sw == 0)
+            if(sw == 0){
+                System.out.println("La matriz ha sido ordenada correctamente.\n");
                 return;
+            }
         }
+        System.out.println("La matriz ha sido ordenada correctamente.\n");
     }
     public static void intercambiarColumnas() {
         System.out.println("Ingrese la primera columna a cambiar:");
@@ -327,6 +331,7 @@ public class Program {
         int c2 = entry.nextInt() - 1;
         for(int i = 0; i < order; i++)
             intercambiar(i, c1, i, c2);
+        System.out.println("Las columnas han sido intercambiadas correctamente.\n");
     }
     public static void datosQueSeanPrimos() {
         ArrayList<String> primes = new ArrayList<>();
@@ -349,9 +354,9 @@ public class Program {
         else{
             System.out.println("Los datos primos son:\n"
                     + "DATO:\tFILA:\tCOLUMNA:");
-            for(int i = 0; i < primes.size(); i++){
+            for(int i = 0; i < primes.size(); i++)
                 System.out.println(primes.get(i).substring(0, primes.get(i).indexOf('-')) + "\t" + primes.get(i).substring(primes.get(i).indexOf('-') + 1, primes.get(i).indexOf(',')) + "\t" + primes.get(i).substring(primes.get(i).indexOf(',') + 1));
-            }
+            System.out.println();
         }
     }
   
