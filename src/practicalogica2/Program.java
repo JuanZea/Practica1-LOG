@@ -321,7 +321,34 @@ public class Program {
         System.out.println("La matriz ha diso ordenada correctamente.\n");
     }
     public static void mostrarPorFilasTriangularSuperiorDerecha() {
-        
+        int i = 0;
+        System.out.println("VECTOR TRIANGULAR SUPERIOR DERECHA POR FILAS:");
+        for (int f = 0; f < order; f++) {
+            for (int c = 0 + i; c < order; c++) {
+                System.out.print(matrix[f][c]);
+                if(f == (order - 1) && c == (order - 1))
+                    System.out.println(".\n");
+                else
+                    System.out.print(",  ");
+            }
+            i++;
+        }
+//        i = 0;
+//        int count = 1;
+//        int z = order - 1;
+//        for (int f = 0; f < order; f++) {
+//            for (int c = 0 + i; c < order; c++) {
+//                System.out.print(matrix[f][c] + calculadorEspacio(matrix[f][c], c));
+//                if(c == order - 1){
+//                    while (z > 0 && count > 0) {                        
+//                        System.out.print("0" + calculadorEspacio(0, 0));
+//                        z--;
+//                    } 
+//                    count++;
+//                }
+//            }
+//            i++;
+//        }        
     }
     public static void ordenarAscendentementePorColumna1() {
         int i, j, sw;
