@@ -88,7 +88,7 @@ public class Program {
 //        String dir = entry.next();
         try {
             //TEST
-            in = new Scanner(new BufferedReader(new FileReader("C:/Users/ASUS/Desktop/jil.txt")));
+            in = new Scanner(new BufferedReader(new FileReader("C:/Users/daniela.vasquezl1/Desktop/ZV.txt")));
            
 //            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
             while(in.hasNext()){
@@ -321,34 +321,16 @@ public class Program {
         System.out.println("La matriz ha diso ordenada correctamente.\n");
     }
     public static void mostrarPorFilasTriangularSuperiorDerecha() {
-        int i = 0;
-        System.out.println("VECTOR TRIANGULAR SUPERIOR DERECHA POR FILAS:");
         for (int f = 0; f < order; f++) {
-            for (int c = 0 + i; c < order; c++) {
-                System.out.print(matrix[f][c]);
-                if(f == (order - 1) && c == (order - 1))
-                    System.out.println(".\n");
+            for (int c = 0; c < order; c++) {
+                if(f > c)
+                    System.out.print("\t");
                 else
-                    System.out.print(",  ");
+                    System.out.print(matrix[f][c] + "\t");
             }
-            i++;
+            System.out.print("\n");
         }
-//        i = 0;
-//        int count = 1;
-//        int z = order - 1;
-//        for (int f = 0; f < order; f++) {
-//            for (int c = 0 + i; c < order; c++) {
-//                System.out.print(matrix[f][c] + calculadorEspacio(matrix[f][c], c));
-//                if(c == order - 1){
-//                    while (z > 0 && count > 0) {                        
-//                        System.out.print("0" + calculadorEspacio(0, 0));
-//                        z--;
-//                    } 
-//                    count++;
-//                }
-//            }
-//            i++;
-//        }        
+        System.out.println();
     }
     public static void ordenarAscendentementePorColumna1() {
         int i, j, sw;
