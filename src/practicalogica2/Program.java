@@ -82,15 +82,12 @@ public class Program {
     public static void leeMatriz() throws IOException{
         Scanner in = null;
         ArrayList<Integer> numbers = new ArrayList<>();        
-//        System.out.println("Ingrese el nombre del archivo de texto:");
-//        String name = entry.next();
-//        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer:");
-//        String dir = entry.next();
-        try {
-            //TEST
-            in = new Scanner(new BufferedReader(new FileReader("C:/Users/Andres/OneDrive/Escritorio/ZVL.txt")));
-           
-//            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
+        System.out.println("Ingrese el nombre del archivo de texto:");
+        String name = entry.next();
+        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer:");
+        String dir = entry.next();
+        try {            
+            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
             while(in.hasNext()){
                 numbers.add(Integer.parseInt(in.next()));
             }
