@@ -88,7 +88,7 @@ public class Program {
 //        String dir = entry.next();
         try {
             //TEST
-            in = new Scanner(new BufferedReader(new FileReader("C:/Users/daniela.vasquezl1/Desktop/ZV.txt")));
+            in = new Scanner(new BufferedReader(new FileReader("C:/Users/Andres/OneDrive/Escritorio/ZVL.txt")));
            
 //            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
             while(in.hasNext()){
@@ -275,7 +275,7 @@ public class Program {
                 }
             }
         }
-        System.out.println("Las columnas de la matriz han sido ordenada correctamente.\n");
+        System.out.println("Las columnas de la matriz han sido ordenadas correctamente.\n");
     }
     public static void promedioDiagonalSecundaria() {
         int sum = 0;
@@ -318,7 +318,7 @@ public class Program {
                 c = 0;
             }
         }
-        System.out.println("La matriz ha diso ordenada correctamente.\n");
+        System.out.println("La matriz ha sido ordenada correctamente.\n");
     }
     public static void mostrarPorFilasTriangularSuperiorDerecha() {
         for (int f = 0; f < order; f++) {
