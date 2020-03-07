@@ -87,7 +87,8 @@ public class Program {
         System.out.println("Ingrese la direccion donde se encuentra el archivo a leer:");
         String dir = entry.next();
         try {            
-            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
+            //in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
+            in = new Scanner(new BufferedReader(new FileReader("C:/Users/ASUS/Desktop/jil.txt")));
             while(in.hasNext()){
                 numbers.add(Integer.parseInt(in.next()));
             }
@@ -215,14 +216,14 @@ public class Program {
                     if(k == sum){
                         if(first){
                             various = true;
-                            variousPlus.add(String.valueOf(k) + "-" + fila);
+                            variousPlus.add(String.valueOf(k) + "-" + fila + "+" + (j + 1));
                             fila = i + 1;                        
-                            variousPlus.add(String.valueOf(k) + "-" + fila); 
+                            variousPlus.add(String.valueOf(k) + "-" + fila + "+" + (j + 1)); 
                             first = false;
                         }
                         else{
                             fila = i + 1;  
-                            variousPlus.add(String.valueOf(k) + "-" + fila); 
+                            variousPlus.add(String.valueOf(k) + "-" + fila + "+" + (j + 1)); 
                         }                     
                     }
                     else{
@@ -248,9 +249,9 @@ public class Program {
             System.out.println("DATO CON MAYOR SUMA DE DIGITOS POR COLUMNA:\nCOLUMNA:\tVALOR:\tFILA:\tSUMA:");
             for (int i = 0; i < order; i++) {
                 int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna[i].substring(0, datoConMayorSumaDigitosPorColumna[i].indexOf('-')));
-                if(v == Integer.parseInt(variousPlus.get(0).substring(0, variousPlus.get(0).indexOf('-')))){
+                if(v == Integer.parseInt(variousPlus.get(0).substring(0, variousPlus.get(0).indexOf('-'))) && (i + 1) == Integer.parseInt(variousPlus.get(0).substring(variousPlus.get(0).indexOf('+') + 1))){
                     for (int t = 0; t < variousPlus.size(); t++) {
-                        int f = Integer.parseInt(variousPlus.get(t).substring(variousPlus.get(t).indexOf('-') + 1));
+                        int f = Integer.parseInt(variousPlus.get(t).substring(variousPlus.get(t).indexOf('-') + 1,variousPlus.get(t).indexOf('+')));
                         System.out.println((i + 1) + "(" + (t + 1) + ")" + "\t\t" + matrix[f - 1][i] + "   " + calculadorEspacio(matrix[f - 1][i], -1) + f +"\t" + v);
                     }
                 }                    
@@ -349,8 +350,16 @@ public class Program {
     public static void intercambiarColumnas() {
         System.out.println("Ingrese la primera columna a cambiar:");
         int c1 = entry.nextInt() - 1;
+        if (c1 < 0 || c1 >= order) {
+            System.out.println("La columna no existe.\n");
+            return;
+        }
         System.out.println("Ingrese la segunda columna a cambiar:");
         int c2 = entry.nextInt() - 1;
+        if (c2 < 0 || c2 >= order) {
+            System.out.println("La columna no existe.\n");
+            return;
+        }
         for(int i = 0; i < order; i++)
             intercambiar(i, c1, i, c2);
         System.out.println("Las columnas han sido intercambiadas correctamente.\n");
