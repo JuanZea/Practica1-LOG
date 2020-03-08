@@ -17,9 +17,10 @@ public class Program {
     static int[][] matrix;
     
     public static void menu() throws IOException{
-        int ans;
+        String ans0;
+        int ans = 1007238750;
         do {            
-            System.out.println("Digite el número correspondiente a la opción que desea:\n"
+            System.out.println("Digite el número correspondiente a la opción que desea (Digite '*' para información):\n"
                     + "1.  leeMatriz.\n"
                     + "2.  muestraMatriz.\n"
                     + "3.  sumarDatos.\n"
@@ -36,8 +37,16 @@ public class Program {
                     + "14. intercambiarColumnas.\n"
                     + "15. datosQueSeanPrimos.\n"
                     + "0.  SALIR.");
-            ans = entry.nextInt();
-            if(ans == 1 || ans == 0 || existMatrix){
+            ans0 = entry.next();
+            if(!isNumeric(ans0)){
+                if(ans0.equals("*"))
+                    information();
+                else
+                    System.out.println("El dato no es númerico.\n");
+            }
+            else{
+                ans = Integer.parseInt(ans0);
+                if(ans == 1 || ans == 0 || (existMatrix && (ans > 1 && ans < 16))){
                 switch(ans){
                 default:break;
                 case 1:leeMatriz();
@@ -77,18 +86,19 @@ public class Program {
                     System.out.println("Primero debe leer una matriz.\n"); 
                 else
                     System.out.println("La opción no existe.\n");
+            }            
         } while (ans != 0);
     }
     public static void leeMatriz() throws IOException{
         Scanner in = null;
         ArrayList<Integer> numbers = new ArrayList<>();        
-//        System.out.println("Ingrese el nombre del archivo de texto:");
+//        System.out.println("Ingrese el nombre del archivo de texto sin la extensión '.txt' (Ejemplo: Matriz1):");
 //        String name = entry.next();
-//        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer:");
+//        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer (Ejemplo: C:\\Users\\ASUS\\Desktop):");
 //        String dir = entry.next();
         try {            
-            //in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
-            in = new Scanner(new BufferedReader(new FileReader("C:/Users/ASUS/Desktop/jil.txt")));
+//            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
+              in = new Scanner(new BufferedReader(new FileReader("C:\\Users\\ASUS\\Desktop\\jil.txt")));
             while(in.hasNext()){
                 numbers.add(Integer.parseInt(in.next()));
             }
@@ -109,10 +119,12 @@ public class Program {
         }
     }
     public static void muestraMatriz() {
-        for(int i = 0; i < order; i++)
+        for(int i = 0; i < order; i++){
             for (int j = 0; j < order; j++) 
-                System.out.print(matrix[i][j] + calculadorEspacio(matrix[i][j], j));
-        System.out.println();
+                System.out.print(matrix[i][j] + "\t");
+            System.out.print("\n");
+        }
+        System.out.println("");
     }
     public static void sumarDatos() {
         int sum = 0;
@@ -124,7 +136,7 @@ public class Program {
         System.out.println("La suma de todos los datos de la matriz es: " + sum + "\n");
     }
     public static void muestraMayor() {
-        int k = 0;
+        int k = matrix[0][0];
         int fila = 0;
         int columna = 0;
         for (int i = 0; i < order; i++) 
@@ -140,7 +152,7 @@ public class Program {
         + "Columna: " + columna + "\n");
     }
     public static void muestraMenor() {
-        int k = 1000;
+        int k = matrix[0][0];
         int fila = 0;
         int columna = 0;
         for (int i = 0; i < order; i++) 
@@ -158,7 +170,7 @@ public class Program {
     public static void vectorConMenorPorFila() {
         String[] menorPorFila = new String[order];
         for (int i = 0; i < order; i++) {
-            int k = 1000;
+            int k = matrix[i][0];
             int columna = 0;
             for (int j = 0; j < order; j++) {
                 if(k >= matrix[i][j]){
@@ -170,16 +182,16 @@ public class Program {
         }
         System.out.println("VECTOR CON MENOR POR FILA:\nFILA:\tVALOR:\tCOLUMNA:");
         for (int i = 0; i < order; i++) {
-            int f = Integer.parseInt(menorPorFila[i].substring(0, menorPorFila[i].indexOf('-')));
+            int v = Integer.parseInt(menorPorFila[i].substring(0, menorPorFila[i].indexOf('-')));
             String c = menorPorFila[i].substring(menorPorFila[i].indexOf('-') + 1);
-            System.out.println((i + 1) + "    \t" + f + "   " + calculadorEspacio(f, -1) + c);
+            System.out.println((i + 1) + "\t" + v + "\t" + c);
         }
         System.out.println();
     }
     public static void vectorConMayorPorColumna() {
         String[] mayorPorColumna = new String[order];
         for (int j = 0; j < order; j++) {
-            int k = 0;
+            int k = matrix[0][j];
             int fila = 0;
             for (int i = 0; i < order; i++) {
                 if(k <= matrix[i][j]){
@@ -193,17 +205,16 @@ public class Program {
         for (int i = 0; i < order; i++) {
             int v = Integer.parseInt(mayorPorColumna[i].substring(0, mayorPorColumna[i].indexOf('-')));
             int f = Integer.parseInt(mayorPorColumna[i].substring(mayorPorColumna[i].indexOf('-') + 1));
-            System.out.println((i + 1) + "    \t\t" + v + "   " + calculadorEspacio(v, -1) + f);
+            System.out.println((i + 1) + "\t\t" + v + "\t" + f);
         }
         System.out.println();
     }
     public static void muestraDatoConMayorSumaDigitosPorColumna() {
         ArrayList<String> datoConMayorSumaDigitosPorColumna = new ArrayList<>();
         ArrayList<String> variousPlus = new ArrayList<>();
-        boolean various = false;
         for (int j = 0; j < order; j++) {
             int k = -1007238750;
-            int fila = 0;
+            int f = 0;
             boolean first = true;
             for (int i = 0; i < order; i++) {
                 int num = matrix[i][j];
@@ -215,61 +226,61 @@ public class Program {
                 if(k <= sum){
                     if(k == sum){
                         if(first){
-                            various = true;
-                            variousPlus.add(String.valueOf(k) + "-" + fila + "+" + (j + 1));
-                            fila = i + 1;                        
-                            variousPlus.add(String.valueOf(k) + "-" + fila + "+" + (j + 1)); 
+                            variousPlus.add(String.valueOf(k) + "-" + f + "+" + j);
+                            f = i;                        
+                            variousPlus.add(String.valueOf(k) + "-" + f + "+" + j); 
                             first = false;
                         }
                         else{
-                            fila = i + 1;  
-                            variousPlus.add(String.valueOf(k) + "-" + fila + "+" + (j + 1)); 
+                            f = i;  
+                            variousPlus.add(String.valueOf(k) + "-" + f + "+" + j); 
                         }                     
                     }
                     else{
                         k = sum;
                         variousPlus.clear();
-                        fila = i + 1;
-                        various = false;
+                        f = i;
                     }                    
                 }                    
             }
             if(variousPlus.isEmpty())
-                datoConMayorSumaDigitosPorColumna.add(k + "-" + fila);
+                datoConMayorSumaDigitosPorColumna.add(k + "-" + f);
             else{
                 for(int x = 0; x < variousPlus.size(); x++){
                     datoConMayorSumaDigitosPorColumna.add(variousPlus.get(x));
                 }                    
             }
-        }
-        if(!various){
-            System.out.println("DATO CON MAYOR SUMA DE DIGITOS POR COLUMNA:\nCOLUMNA:\tVALOR:\tFILA:\tSUMA:");
-            for (int i = 0; i < order; i++) {
-                int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(0, datoConMayorSumaDigitosPorColumna.get(i).indexOf('-')));
+        }  
+        boolean first = true;
+        System.out.println("DATO CON MAYOR SUMA DE DIGITOS POR COLUMNA:\nCOLUMNA:\tVALOR:\tFILA:\tSUMA:");
+        int t = 1;
+        int c = 0;
+        int cTemp = 0;
+        for (int i = 0; i < datoConMayorSumaDigitosPorColumna.size(); i++) {
+            int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(0, datoConMayorSumaDigitosPorColumna.get(i).indexOf('-')));
+            if(datoConMayorSumaDigitosPorColumna.get(i).contains("+")){
+                int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(datoConMayorSumaDigitosPorColumna.get(i).indexOf('-') + 1,datoConMayorSumaDigitosPorColumna.get(i).indexOf('+')));                    
+                cTemp = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(datoConMayorSumaDigitosPorColumna.get(i).indexOf('+')));
+                if(c != cTemp){
+                    c = cTemp;
+                    t = 1;
+                }
+                else
+                    c = cTemp;
+                System.out.println((c + 1) + "(" + t + ")" + "\t\t" + matrix[f][c] + "\t" + (f + 1) + "\t" + v);
+                first = false;
+                t++;
+            }                    
+            else{
+                if(!first)
+                    c++;
                 int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(datoConMayorSumaDigitosPorColumna.get(i).indexOf('-') + 1));
-                System.out.println((i + 1) + "    \t\t" + matrix[f - 1][i] + "   " + calculadorEspacio(matrix[f - 1][i], -1) + f + "\t" + v);
-            }
-            System.out.println(); 
+                System.out.println((c + 1) + "\t\t" + matrix[f][c] + "\t" + (f + 1) + "\t" + v);
+                first = false;
+                t = 1;
+            }   
         }
-        else{
-            System.out.println("DATO CON MAYOR SUMA DE DIGITOS POR COLUMNA:\nCOLUMNA:\tVALOR:\tFILA:\tSUMA:");
-            for (int c = 0; c < order; c++) {
-                int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(c).substring(0, datoConMayorSumaDigitosPorColumna.get(c).indexOf('-')));
-                int t = 1;
-                if(datoConMayorSumaDigitosPorColumna.get(c).length() == 5){
-                        while(datoConMayorSumaDigitosPorColumna.get(c).length() == 5){
-                           int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(c).substring(datoConMayorSumaDigitosPorColumna.get(c).indexOf('-') + 1,datoConMayorSumaDigitosPorColumna.get(c).indexOf('+')));                    
-                            System.out.println((c + 1) + "(" + t + ")" + "\t\t" + matrix[f - 1][c] + "   " + calculadorEspacio(matrix[f - 1][c], -1) + f +"\t" + v);
-                        t++; 
-                    }                    
-                }                    
-                else{
-                    int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(c).substring(datoConMayorSumaDigitosPorColumna.get(c).indexOf('-') + 1));
-                    System.out.println((c + 1) + "    \t\t" + matrix[f - 1][c] + "   " + calculadorEspacio(matrix[f - 1][c], -1) + f + "\t" + v);
-                }   
-            }
-            System.out.println();
-        }     
+        System.out.println();
     }
     public static void ordenaCadaColumnaAscendentemente() {
         int i, j, c;
@@ -277,7 +288,7 @@ public class Program {
             for (i = 0; i < order - 1; i++) {
                 for (j = 0; j <= order - 2 - i; j++) {
                     if(matrix[j][c] > matrix[j+1][c])
-                        intercambiar(j, c, j+1, c);
+                        swap(j, c, j+1, c);
                 }
             }
         }
@@ -286,7 +297,7 @@ public class Program {
     public static void promedioDiagonalSecundaria() {
         int sum = 0;
         for(int i = 0; i < order; i++){
-            int num = matrix[i][(order - 1) - i];
+            int num = matrix[i][order - 1 - i];
             sum += num;
         }
         Double mean =(double)sum/order;
@@ -327,6 +338,7 @@ public class Program {
         System.out.println("La matriz ha sido ordenada correctamente.\n");
     }
     public static void mostrarPorFilasTriangularSuperiorDerecha() {
+        System.out.println("MATRIZ TRIANGULAR SUPERIOR DERECHA:\n");
         for (int f = 0; f < order; f++) {
             for (int c = 0; c < order; c++) {
                 if(f > c)
@@ -344,7 +356,7 @@ public class Program {
             sw = 0;
             for (j = 0; j <= order - 2 - i; j++) {
                 if(matrix[j][0] > matrix[j + 1][0]){                    
-                    intercambiarFilas(j, j + 1);
+                    swapRows(j, j + 1);
                     sw = 1;
                 }
             }
@@ -357,19 +369,33 @@ public class Program {
     }
     public static void intercambiarColumnas() {
         System.out.println("Ingrese la primera columna a cambiar:");
-        int c1 = entry.nextInt() - 1;
+        String c1i = entry.next();
+        int c1;
+        if(!isNumeric(c1i)){
+            System.out.println("El dato no es númerico.\n");
+            return;
+        }
+        else
+            c1 = Integer.parseInt(c1i) - 1;
         if (c1 < 0 || c1 >= order) {
             System.out.println("La columna no existe.\n");
             return;
         }
         System.out.println("Ingrese la segunda columna a cambiar:");
-        int c2 = entry.nextInt() - 1;
+        String c2i = entry.next();
+        int c2;
+        if(!isNumeric(c2i)){
+            System.out.println("El dato no es númerico.\n");
+            return;
+        }
+        else
+            c2 = Integer.parseInt(c2i) - 1;
         if (c2 < 0 || c2 >= order) {
             System.out.println("La columna no existe.\n");
             return;
         }
         for(int i = 0; i < order; i++)
-            intercambiar(i, c1, i, c2);
+            swap(i, c1, i, c2);
         System.out.println("Las columnas han sido intercambiadas correctamente.\n");
     }
     public static void datosQueSeanPrimos() {
@@ -386,42 +412,42 @@ public class Program {
                     count++;
                 }
                 if(prime)
-                    primes.add(matrix[i][j] + "-" + (i + 1) + "," + (j + 1));
+                    primes.add(matrix[i][j] + "-" + (i + 1) + "+" + (j + 1));
             }
         if(primes.isEmpty())
-            System.out.println("No hay datos que sean primos.");
+            System.out.println("No hay datos que sean primos.\n");
         else{
             System.out.println("Los datos primos son:\n"
                     + "DATO:\tFILA:\tCOLUMNA:");
             for(int i = 0; i < primes.size(); i++)
-                System.out.println(primes.get(i).substring(0, primes.get(i).indexOf('-')) + "\t" + primes.get(i).substring(primes.get(i).indexOf('-') + 1, primes.get(i).indexOf(',')) + "\t" + primes.get(i).substring(primes.get(i).indexOf(',') + 1));
+                System.out.println(primes.get(i).substring(0, primes.get(i).indexOf('-')) + "\t" + primes.get(i).substring(primes.get(i).indexOf('-') + 1, primes.get(i).indexOf('+')) + "\t" + primes.get(i).substring(primes.get(i).indexOf('+') + 1));
             System.out.println();
         }
     }
   
-    public static void intercambiarFilas(int f1, int f2) {
-        for(int i = 0; i < order; i++)
-            intercambiar(f1, i, f2, i);
+    public static void information(){
+        System.out.println("INFORMACIÓN:\n"
+                + "*El programa trabaja con una matriz de '0' a 'n - 1', con 'n' el orden de la matriz, es decir, que \n"
+                + " hay una fila '0' y una columna '0', pero en la interacción con el usuario se trabaja con \n"
+                + " una matriz de '1' a 'n' por eso en la consola se muestra y se recibe la información de una matriz \n"
+                + " que comienza en la fila 1 y en la columna 1.\n");
     }
-    public static void intercambiar(int f1,int c1, int f2, int c2) {
+    public static boolean isNumeric(String ans){
+	try {
+		Integer.parseInt(ans);
+		return true;
+	} catch (NumberFormatException e){
+		return false;
+	}
+    }   
+    public static void swapRows(int f1, int f2) {
+        for(int i = 0; i < order; i++)
+            swap(f1, i, f2, i);
+    }
+    public static void swap(int f1,int c1, int f2, int c2) {
         int aux = matrix[f1][c1];
         matrix[f1][c1] = matrix[f2][c2];
         matrix[f2][c2] = aux;
-    }
-    public static String calculadorEspacio(int num, int pos) {
-        String espacio = "  ";
-        num = Integer.toString(num).length();
-        if(pos != (order - 1))
-            switch(num){
-                case 1:espacio+="  ";
-                break;
-                case 2:espacio+=" ";
-                break;
-                case 3:break;
-            }
-        else
-            espacio += "\n";
-        return espacio;
     }
     public static void main(String[] args) throws IOException{
         menu();
