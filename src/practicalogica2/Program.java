@@ -92,13 +92,12 @@ public class Program {
     public static void leeMatriz() throws IOException{
         Scanner in = null;
         ArrayList<Integer> numbers = new ArrayList<>();        
-//        System.out.println("Ingrese el nombre del archivo de texto sin la extensión '.txt' (Ejemplo: Matriz1):");
-//        String name = entry.next();
-//        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer (Ejemplo: C:\\Users\\ASUS\\Desktop):");
-//        String dir = entry.next();
+        System.out.println("Ingrese el nombre del archivo de texto sin la extensión '.txt' (Ejemplo: Matriz1):");
+        String name = entry.next();
+        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer (Ejemplo: C:\\Users\\ASUS\\Desktop):");
+        String dir = entry.next();
         try {            
-//            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
-              in = new Scanner(new BufferedReader(new FileReader("C:\\Users\\ASUS\\Desktop\\jil.txt")));
+            in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
             while(in.hasNext()){
                 numbers.add(Integer.parseInt(in.next()));
             }
