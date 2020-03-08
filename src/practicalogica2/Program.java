@@ -85,7 +85,11 @@ public class Program {
                 }
             }                
             else
-                System.out.println("La opción no existe.\n");
+                if(ans <= 15 && ans >= 0)
+                    System.out.println("Primero debe leer una matriz.\n"); 
+                else
+                    System.out.println("La opción no existe.\n");
+            
             }            
         } while (ans != 0);
     }
