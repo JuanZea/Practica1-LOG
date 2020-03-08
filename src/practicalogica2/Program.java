@@ -19,8 +19,14 @@ public class Program {
     public static void menu() throws IOException{
         String ans0;
         int ans = 1007238750;
+        System.out.println("BIENVENID@");
+        System.out.println("INFORMACIÓN:\n"
+                + "*El programa trabaja con una matriz de '0' a 'n - 1', con 'n' el orden de la matriz, es decir, que \n"
+                + " hay una fila '0' y una columna '0', pero en la interacción con el usuario se trabaja con \n"
+                + " una matriz de '1' a 'n' por eso en la consola se muestra y se recibe la información de una matriz \n"
+                + " que comienza en la fila 1 y en la columna 1.\n");
         do {            
-            System.out.println("Digite el número correspondiente a la opción que desea (Digite '*' para información):\n"
+            System.out.println("Digite el número correspondiente a la opción que desea realizar:\n"
                     + "1.  leeMatriz.\n"
                     + "2.  muestraMatriz.\n"
                     + "3.  sumarDatos.\n"
@@ -39,10 +45,7 @@ public class Program {
                     + "0.  SALIR.");
             ans0 = entry.next();
             if(!isNumeric(ans0)){
-                if(ans0.equals("*"))
-                    information();
-                else
-                    System.out.println("El dato no es númerico.\n");
+                System.out.println("El dato no es númerico.\n");
             }
             else{
                 ans = Integer.parseInt(ans0);
@@ -82,10 +85,7 @@ public class Program {
                 }
             }                
             else
-                if(ans <= 15)
-                    System.out.println("Primero debe leer una matriz.\n"); 
-                else
-                    System.out.println("La opción no existe.\n");
+                System.out.println("La opción no existe.\n");
             }            
         } while (ans != 0);
     }
@@ -94,7 +94,7 @@ public class Program {
         ArrayList<Integer> numbers = new ArrayList<>();        
         System.out.println("Ingrese el nombre del archivo de texto sin la extensión '.txt' (Ejemplo: Matriz1):");
         String name = entry.next();
-        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer (Ejemplo: C:\\Users\\ASUS\\Desktop):");
+        System.out.println("Ingrese la dirección donde se encuentra el archivo a leer (Ejemplo: C:\\Users\\ASUS\\Desktop):");
         String dir = entry.next();
         try {            
             in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
@@ -424,13 +424,6 @@ public class Program {
         }
     }
   
-    public static void information(){
-        System.out.println("INFORMACIÓN:\n"
-                + "*El programa trabaja con una matriz de '0' a 'n - 1', con 'n' el orden de la matriz, es decir, que \n"
-                + " hay una fila '0' y una columna '0', pero en la interacción con el usuario se trabaja con \n"
-                + " una matriz de '1' a 'n' por eso en la consola se muestra y se recibe la información de una matriz \n"
-                + " que comienza en la fila 1 y en la columna 1.\n");
-    }
     public static boolean isNumeric(String ans){
 	try {
 		Integer.parseInt(ans);
