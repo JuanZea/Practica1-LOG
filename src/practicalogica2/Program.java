@@ -82,10 +82,10 @@ public class Program {
     public static void leeMatriz() throws IOException{
         Scanner in = null;
         ArrayList<Integer> numbers = new ArrayList<>();        
-        System.out.println("Ingrese el nombre del archivo de texto:");
-        String name = entry.next();
-        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer:");
-        String dir = entry.next();
+//        System.out.println("Ingrese el nombre del archivo de texto:");
+//        String name = entry.next();
+//        System.out.println("Ingrese la direccion donde se encuentra el archivo a leer:");
+//        String dir = entry.next();
         try {            
             //in = new Scanner(new BufferedReader(new FileReader(dir + "/" + name + ".txt")));
             in = new Scanner(new BufferedReader(new FileReader("C:/Users/ASUS/Desktop/jil.txt")));
@@ -198,7 +198,7 @@ public class Program {
         System.out.println();
     }
     public static void muestraDatoConMayorSumaDigitosPorColumna() {
-        String [] datoConMayorSumaDigitosPorColumna = new String[order];
+        ArrayList<String> datoConMayorSumaDigitosPorColumna = new ArrayList<>();
         ArrayList<String> variousPlus = new ArrayList<>();
         boolean various = false;
         for (int j = 0; j < order; j++) {
@@ -228,36 +228,44 @@ public class Program {
                     }
                     else{
                         k = sum;
-                        fila = i + 1;
                         variousPlus.clear();
+                        fila = i + 1;
                         various = false;
                     }                    
                 }                    
             }
-            datoConMayorSumaDigitosPorColumna[j] = k + "-" + fila;
+            if(variousPlus.isEmpty())
+                datoConMayorSumaDigitosPorColumna.add(k + "-" + fila);
+            else{
+                for(int x = 0; x < variousPlus.size(); x++){
+                    datoConMayorSumaDigitosPorColumna.add(variousPlus.get(x));
+                }                    
+            }
         }
         if(!various){
             System.out.println("DATO CON MAYOR SUMA DE DIGITOS POR COLUMNA:\nCOLUMNA:\tVALOR:\tFILA:\tSUMA:");
             for (int i = 0; i < order; i++) {
-                int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna[i].substring(0, datoConMayorSumaDigitosPorColumna[i].indexOf('-')));
-                int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna[i].substring(datoConMayorSumaDigitosPorColumna[i].indexOf('-') + 1));
+                int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(0, datoConMayorSumaDigitosPorColumna.get(i).indexOf('-')));
+                int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(i).substring(datoConMayorSumaDigitosPorColumna.get(i).indexOf('-') + 1));
                 System.out.println((i + 1) + "    \t\t" + matrix[f - 1][i] + "   " + calculadorEspacio(matrix[f - 1][i], -1) + f + "\t" + v);
             }
             System.out.println(); 
         }
         else{
             System.out.println("DATO CON MAYOR SUMA DE DIGITOS POR COLUMNA:\nCOLUMNA:\tVALOR:\tFILA:\tSUMA:");
-            for (int i = 0; i < order; i++) {
-                int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna[i].substring(0, datoConMayorSumaDigitosPorColumna[i].indexOf('-')));
-                if(v == Integer.parseInt(variousPlus.get(0).substring(0, variousPlus.get(0).indexOf('-'))) && (i + 1) == Integer.parseInt(variousPlus.get(0).substring(variousPlus.get(0).indexOf('+') + 1))){
-                    for (int t = 0; t < variousPlus.size(); t++) {
-                        int f = Integer.parseInt(variousPlus.get(t).substring(variousPlus.get(t).indexOf('-') + 1,variousPlus.get(t).indexOf('+')));
-                        System.out.println((i + 1) + "(" + (t + 1) + ")" + "\t\t" + matrix[f - 1][i] + "   " + calculadorEspacio(matrix[f - 1][i], -1) + f +"\t" + v);
-                    }
+            for (int c = 0; c < order; c++) {
+                int v = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(c).substring(0, datoConMayorSumaDigitosPorColumna.get(c).indexOf('-')));
+                int t = 1;
+                if(datoConMayorSumaDigitosPorColumna.get(c).length() == 5){
+                        while(datoConMayorSumaDigitosPorColumna.get(c).length() == 5){
+                           int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(c).substring(datoConMayorSumaDigitosPorColumna.get(c).indexOf('-') + 1,datoConMayorSumaDigitosPorColumna.get(c).indexOf('+')));                    
+                            System.out.println((c + 1) + "(" + t + ")" + "\t\t" + matrix[f - 1][c] + "   " + calculadorEspacio(matrix[f - 1][c], -1) + f +"\t" + v);
+                        t++; 
+                    }                    
                 }                    
                 else{
-                    int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna[i].substring(datoConMayorSumaDigitosPorColumna[i].indexOf('-') + 1));
-                    System.out.println((i + 1) + "    \t\t" + matrix[f - 1][i] + "   " + calculadorEspacio(matrix[f - 1][i], -1) + f + "\t" + v);
+                    int f = Integer.parseInt(datoConMayorSumaDigitosPorColumna.get(c).substring(datoConMayorSumaDigitosPorColumna.get(c).indexOf('-') + 1));
+                    System.out.println((c + 1) + "    \t\t" + matrix[f - 1][c] + "   " + calculadorEspacio(matrix[f - 1][c], -1) + f + "\t" + v);
                 }   
             }
             System.out.println();
